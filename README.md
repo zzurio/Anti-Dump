@@ -1,4 +1,4 @@
-# AntiDump
+# Anti-Dump
 ### A simple Anti-Dump to slow down and annoy attackers.
 
 ## Usage
