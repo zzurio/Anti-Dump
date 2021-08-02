@@ -23,6 +23,7 @@ public class AntiDump {
     private static boolean ENABLE;
 
     private static final String[] naughtyFlags = {
+            "-XBootclasspath",
             "-javaagent",
             "-Xdebug",
             "-agentlib",
