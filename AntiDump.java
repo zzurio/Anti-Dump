@@ -3,6 +3,7 @@ package club.cpacket.antidump;
 import net.minecraftforge.fml.common.FMLCommonHandler;
 import org.objectweb.asm.ClassWriter;
 import org.objectweb.asm.tree.*;
+import sun.management.VMManagement;
 import sun.misc.Unsafe;
 
 import java.lang.management.ManagementFactory;
@@ -55,7 +56,10 @@ public class AntiDump {
     public static void check() {
         if (!ENABLE) return;
         try {
-            List<String> inputArguments = ManagementFactory.getRuntimeMXBean().getInputArguments();
+            Field jvmField = ManagementFactory.getRuntimeMXBean().getClass().getDeclaredField("jvm");
+            jvmField.setAccessible(true);
+            VMManagement jvm = (VMManagement) jvmField.get(ManagementFactory.getRuntimeMXBean());
+            List<String> inputArguments = jvm.getVmArguments();
 
             for (String arg : naughtyFlags) {
                 for (String inputArgument : inputArguments) {
